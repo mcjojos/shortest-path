@@ -117,8 +117,12 @@ mvn clean package
 ```
 and run the JAR by typing
 ```
-java -jar target/shortest-path-1.0-SNAPSHOT.jar
+java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv
 ```
+Give the input file(s) as program parameters by specifying -input fileName
+The file name can eithe be a single file or a directory. In the later case it will try and parse every .csv file inside
+the directory and run and produce some results for every single file of the program.
+
 ## Implementation Details
 
 
