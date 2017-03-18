@@ -8,6 +8,19 @@ package com.jojos.path.calculation;
 public class Computations {
 
     /**
+     * A normalized package weight is the greater value of an actual weight or a volumetric weight.
+     *
+     * @param actualWeight
+     * @param dimension
+     * @return the maximum of the actual weight and the so-called volumetric weight of the package
+     *
+     * @see #volumetricWeight(Dimension)
+     */
+    public static double normalizedPackageWeight(double actualWeight, Dimension dimension) {
+        return Math.max(actualWeight, volumetricWeight(dimension));
+    }
+
+    /**
      * A 'volumetric weight' (sometimes called dimensional weight) is a formula often applied by
      * carriers to take into account volume as a function of weight. A light package that
      * takes up a lot of space is just as difficult to ship as a small package that weighs a lot.
@@ -21,16 +34,18 @@ public class Computations {
      * rounded up to the `nearest 0,5kg` is `1kg`.
      *
      * @return a double that will represent the result of the aforementioned calculation
+     *
+     * @see #roundUpToHalf(double)
      */
-    public static double volumetricWeight(double width, double length, double height) {
-        double number = (width * length * height) / 5000;
+    static double volumetricWeight(Dimension dimension) {
+        double number = (dimension.getWidth() * dimension.getLength() * dimension.getHeight()) / 5_000d;
         return roundUpToHalf(number);
     }
 
     /**
      * This function is simply rounding up a double value by 0.5
+     *
      * examples:
-     * example:
      * 12.4 --> 12.5
      * 15.5 --> 15.5
      * 22.2 --> 22.5
