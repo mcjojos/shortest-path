@@ -1,5 +1,4 @@
-Shortest path service
-A program that can calculate the minimum cost between nodes.
+The shortest path service is a program that can calculate the minimum cost between nodes.
 
 ## Synopsis
 This program is calculating the minimum path between nodes. The nodes are connected with vertexes of different weight.
