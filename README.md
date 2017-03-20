@@ -243,10 +243,10 @@ will output the weighted distance instead of the shipping cost
 [ME -> Adam -> Philipp] - [Weight: 17.0]
 ```
 
-###LOGGING
+### LOGGING
 The application's logs exist under LOGS/SHORTEST_PATH_yyyy-MM-dd.log
 
-###TODO
+### FUTURE TODO
 In future releases make the input file name either a single file or a directory. In the later case it should 
 parse every .csv file inside the directory and run and produce some results for every single file of the directory.
 
