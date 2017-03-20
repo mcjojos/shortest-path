@@ -103,7 +103,7 @@ You'll need Java 8 to compile and run the application. You'll also need maven to
 
 ## What does the application produce?
 On its default setup the application will produce a file containing the shortest paths between 
-pairs of sources-targets that are defined in the input file based on the previous mentioned format,
+pairs of `SOURCES-TARGETS` that are defined in the input file based on the previous mentioned format,
 e.g. **ME,Lisa:33,Peter:123,John:55**
 If run with **-assert** it will validate the graph produced by the input file towards the assertions
 included in the same file (lines starting with '@'). For a better explanation of the command line usage
@@ -140,30 +140,32 @@ and all the others being optional arguments
 + -output path/to/output.csv 
 
     the **output** command line argument is an optional argument that points to the output file.
-    If it's omitted the output file's name defaults to "output.csv"
+    If it's omitted the output file's name defaults to "output.csv". Unless it runs with -assert enabled
+    it will output everything inside this file.
     
 + -source name
 
     Optional name that if included will force the application to include in the output only
-    the paths of the graph with a source that equals this name.
-    If omitted the output will include all the paths of all the sources available.
+    the paths of the graph with a `SOURCE` that equals this name.
+    If omitted the output will include all the paths of all the `SOURCES` available.
     
 + -target name
 
     Optional name that is included will force the application to include in the output only
-    the paths of the graph with a target/destination that equals this name.
-    If omitted the output will include all the paths of all the targets available.
+    the paths of the graph with a `TARGET` that equals this name.
+    If omitted the output will include all the paths of all the `TARGETS` available.
 
 + -dimensions 1x3x5x1200
 
    The dimensions of the package based on which the shipping costs are calculated.
    The format is **WidthxLengthxHeightxWeight**. Width, length and height are expressed in cm.
-   The Weight is expressed in kilograms. If omitted the output will contain the weighted cost calculated
-   purely as the sum of the hard units that belong to the shortest path between [source-target] pairs.
+   The Weight is expressed in grams. If omitted the output will instead contain
+   the weighted cost calculated purely as the sum of the hard units that belong to the shortest 
+   path between `[SOURCE-TARGET]` pairs.
 
 + -assert
 
-    This command line argument will force the application to run wit assertions enabled. That means
+    This command line argument will force the application to run with assertions enabled. That means
     it will be able to parse any assertion statements that are included in the input file.
     Assertion statements can take the following form:
     ```
@@ -177,13 +179,23 @@ and all the others being optional arguments
     **IMPORTANT!**
     If the assert command line argument is included in the run command it will cancel every other parameter
     except from -input. Namely it will cancel -output, -target, -source and -dimensions.
+    Assertion output is included in the log file instead of the output file and has the following form
+    ```
+    [ME -> Adam -> Philipp] - [Cost: 2.06]
+    Shipping cost defined for path from ME -> Philipp is correctly asserted to 2.06
+    [ME -> Adam -> Diana -> Martin] - [Cost: 16.96]
+    Shipping cost defined for path from ME -> Martin is correctly asserted to 16.96
+    [ME -> Stefan] - [Cost: 8.0]
+    Shipping cost defined for path from ME -> Stefan is correctly asserted to 8.0
+    ```
+
 
 #### Run by examples
-Remember that you have to first run
+Remember that you have to first run in order to produce the jar file
 ```
 mvn clean package 
 ```
-in order to produce the jar file.
+
 Now suppose the input file contains the following lines
 ```
 ME,Stefan:100,Amir:1042,Martin:595,Adam:10,Philipp:128
@@ -194,7 +206,9 @@ Diana,Amir:57,Martin:3
 Then by issuing the following command
 ```
 java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv -dimensions 1x1x1x400
+```
 will produce the following in a file named output.csv
+```
 [ME -> Stefan] - [Cost: 5.0]
 [ME -> Adam -> Diana -> Amir] - [Cost: 5.0]
 [ME -> Adam -> Diana -> Martin] - [Cost: 3.39]
@@ -218,7 +232,9 @@ By issuing the following (adding the **-output** and **-source** arguments)
 
 ```
 java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv -output output1.csv -source ME -dimensions 1x1x1x400
+```
 will produce the following (in a file named output1.csv)
+```
 [ME -> Stefan] - [Cost: 5.0]
 [ME -> Adam -> Diana -> Amir] - [Cost: 5.0]
 [ME -> Adam -> Diana -> Martin] - [Cost: 3.39]
@@ -230,14 +246,18 @@ will produce the following (in a file named output1.csv)
 By issuing the following (adding **-target** to the previous example)
 ```
 java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv -source ME -target Philipp -dimensions 1x1x1x400
+```
 will produce only the from ME to Philipp - if it exists)
+```
 [ME -> Adam -> Philipp] - [Cost: 2.06]
 ```
 
 By issuing the following (removing the dimensions argument)
 ```
 java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv -source ME -target Philipp
+```
 will output the weighted distance instead of the shipping cost
+```
 [ME -> Adam -> Philipp] - [Weight: 17.0]
 ```
 
