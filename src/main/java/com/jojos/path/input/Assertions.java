@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Simply a list of {@link AssertionElement}s
+ *
  * @author karanikasg@gmail.com
  */
 public class Assertions {

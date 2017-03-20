@@ -8,6 +8,7 @@ import com.jojos.path.input.InputLinesHandler;
 import com.jojos.path.input.InputLinesIterator;
 import com.jojos.path.input.ParsedObject;
 import org.jgrapht.DirectedGraph;
+import org.jgrapht.WeightedGraph;
 import org.jgrapht.graph.ClassBasedEdgeFactory;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.DirectedWeightedPseudograph;
@@ -121,6 +122,10 @@ public class ParseJob {
         return new ParsedObject(graph, assertions);
     }
 
+    /**
+     * A custom implementation for edges in a {@link WeightedGraph}
+     * @param <V>
+     */
     public static class RelationshipEdge<V> extends DefaultWeightedEdge {
         private final V v1;
         private final V v2;
@@ -148,6 +153,10 @@ public class ParseJob {
         }
     }
 
+    /**
+     * The application can run in one of these two modes.
+     * The command line parameter -assert will signal the WITH_ASSERTIONS mode.
+     */
     public enum RunMode {
         WITH_ASSERTIONS,
         WITHOUT_ASSERTIONS

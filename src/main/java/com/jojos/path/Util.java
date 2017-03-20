@@ -1,7 +1,5 @@
 package com.jojos.path;
 
-import com.jojos.path.ApplicationException;
-
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
