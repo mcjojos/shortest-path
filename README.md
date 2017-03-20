@@ -247,12 +247,12 @@ By issuing the following (adding **-target** to the previous example)
 ```
 java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv -source ME -target Philipp -dimensions 1x1x1x400
 ```
-will produce only the from ME to Philipp - if it exists)
+will produce only the from ME to Philipp (only if it exists)
 ```
 [ME -> Adam -> Philipp] - [Cost: 2.06]
 ```
 
-By issuing the following (removing the dimensions argument)
+By issuing the following (removing the **-dimensions** argument)
 ```
 java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.csv -source ME -target Philipp
 ```
