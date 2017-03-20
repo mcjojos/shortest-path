@@ -176,8 +176,8 @@ and all the others being optional arguments
     package to Diana so the cost is a positive infinity.
     
     **IMPORTANT!**
-    If the assert command line argument is included in the run command will cancel every other parameter except from -input.
-    Namely it will cancel -output, -target, -source and -dimensions.
+    If the assert command line argument is included in the run command it will cancel every other parameter
+    except from -input. Namely it will cancel -output, -target, -source and -dimensions.
     
 
 #### Run by examples
