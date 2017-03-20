@@ -43,7 +43,7 @@ You => Philipp: 128 HARD
 You can assume `HARD` units are positive `integers`.
 
 You also know how hard it is for some of your friends to ship a package between themselves, but 
-since not all of your friends may be friends with each other you wouldn't know all shipping 
+since not all of your friends may be friends with each other you would not know all shipping 
 combinations. For example, you only know that:
 ```
 Stefan => Amir: 850 HARD 
@@ -107,6 +107,9 @@ You'll need Java 8 to compile and run the application. You'll also need maven to
 On its default setup the application will produce a file containing the shortest paths between 
 pairs of sources-targets that are defined in the input file based on the previous mentioned format,
 e.g. **ME,Lisa:33,Peter:123,John:55**
+If run with **-assert** it will validate the graph produced by the input file towards the assertions
+included in the same file (lines starting with '@'). For a better explanation of the command line usage
+please read further.
 
 ## How do I run it?
 
@@ -173,10 +176,10 @@ and all the others being optional arguments
     package to Lisa should be `6.89 EUR`. The second assertion states that it's impossible to ship a 
     package to Diana so the cost is a positive infinity.
     
-
-###TODO
-The file name can either be a single file or a directory. In the later case it will try and parse every .csv file inside
-the directory and run and produce some results for every single file of the program.
+    **IMPORTANT!**
+    If the assert command line argument is included in the run command will cancel every other parameter except from -input.
+    Namely it will cancel -output, -target, -source and -dimensions.
+    
 
 #### Run by examples
 Remember that you have to first run
@@ -240,5 +243,13 @@ java -jar target/shortest-path-1.0-SNAPSHOT-jar-with-dependencies.jar -input 01.
 will output the weighted distance instead of the shipping cost
 [ME -> Adam -> Philipp] - [Weight: 17.0]
 ```
+
+###LOGGING
+The application's logs exist under LOGS/SHORTEST_PATH_yyyy-MM-dd.log
+
+###TODO
+In future releases make the input file name either a single file or a directory. In the later case it should 
+parse every .csv file inside the directory and run and produce some results for every single file of the directory.
+
 
 ENJOY!

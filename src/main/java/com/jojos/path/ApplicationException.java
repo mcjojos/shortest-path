@@ -3,7 +3,7 @@ package com.jojos.path;
 /**
  * The main custom application exception defined as a runtime exception so that it doesn't have to appear everywhere
  *
- * @author gkaranikas
+ * @author karanikasg@gmail.com
  */
 public class ApplicationException extends RuntimeException {
 

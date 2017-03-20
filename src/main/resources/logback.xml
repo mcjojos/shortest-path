@@ -10,7 +10,7 @@
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
-            <fileNamePattern>LOGS/SHORTESTPATH_%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <fileNamePattern>LOGS/SHORTEST_PATH_%d{yyyy-MM-dd}.log.gz</fileNamePattern>
             <!-- keep 2 days' worth of history -->
             <maxHistory>2</maxHistory>
         </rollingPolicy>
