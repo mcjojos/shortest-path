@@ -61,12 +61,11 @@ total cost of `4,12 EUR`. Shipping through Adam is the optimal cost.
 ## TASK
 
 Given a package, a network of friends with the shipping `HARD` units, and a friend to which 
-you want to ship a package, write a Java program which always finds the lowest shipping cost 
-possible from you to that friend.
+you want to ship a package, the application will always find the lowest shipping cost 
+possible from you to that friend. For a comprehensive list of program arguments and program modes check further down.
 
-Your program should have a comprehensive documentation so that it's obvious and intuitive for 
-Allpago to run it. Provide unit tests. At minimum, you must provide a unit test capable of consuming a 
-`CSV` file with definition of a your friend network and expected results. The format of a file is:
+The unit tests are capable of consuming a `CSV` file with definition of your friend network and expected results.
+The format of a file is:
 ```
 SOURCE,TARGET:HARD,TARGET:HARD ... 
 @,TARGET,PACKAGE,COST
@@ -135,8 +134,8 @@ and all the others being optional arguments
 + -input path/to/input.csv
     
     the **input** command line argument is a required argument that points to the input file.
-    The application doesn't start if it's not provided.
-    The application expects a coma separated file of the aforementioned format.
+    The application doesn't start if this argument is not provided.
+    The application expects a comma separated file of the aforementioned format.
     
 + -output path/to/output.csv 
 
@@ -178,7 +177,6 @@ and all the others being optional arguments
     **IMPORTANT!**
     If the assert command line argument is included in the run command it will cancel every other parameter
     except from -input. Namely it will cancel -output, -target, -source and -dimensions.
-    
 
 #### Run by examples
 Remember that you have to first run
@@ -243,8 +241,13 @@ will output the weighted distance instead of the shipping cost
 [ME -> Adam -> Philipp] - [Weight: 17.0]
 ```
 
-### LOGGING
+## Logging
 The application's logs exist under LOGS/SHORTEST_PATH_yyyy-MM-dd.log
+
+## Implementation details
+The application is using the [jgrapht](https://github.com/jgrapht/jgrapht/) library and specifically its
+implementation of [Dijkstra's shortest path algorithm](http://mathworld.wolfram.com/DijkstrasAlgorithm.html)
+
 
 ### FUTURE TODO
 In future releases make the input file name either a single file or a directory. In the later case it should 
