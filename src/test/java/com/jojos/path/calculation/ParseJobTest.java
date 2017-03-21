@@ -24,15 +24,14 @@ import java.util.stream.Collectors;
  */
 public class ParseJobTest {
 
-    private static final String PATH = "test_input" + File.separator;
+    private static final String SUCCESS_PATH = "test_success_input" + File.separator;
+    private static final String UNSUCCESSFUL_PATH = "test_wrong_input" + File.separator;
 
     @Test
-    public void testAllResourceFiles() throws URISyntaxException, IOException {
-
-        String[] files = getResourceListing(getClass(), PATH);
+    public void testSuccessResourceFiles() throws URISyntaxException, IOException {
+        String[] files = getResourceListing(getClass(), SUCCESS_PATH);
 
         for (String file : files) {
-            System.out.println(file);
             ParseJob parseJob = new ParseJob(file);
             ParsedObject parsedObject = parseJob.runAndCreateGraph(ParseJob.RunMode.WITH_ASSERTIONS);
 
@@ -42,9 +41,22 @@ public class ParseJobTest {
 
             // we assume that if no ApplicationException is thrown then everything were validate OK
             ShortestPathJob.withAssertions(parsedObject).run();
-
         }
+    }
 
+    @Test
+    public void testUnsuccessfulResourceFiles() throws URISyntaxException, IOException {
+        String[] files = getResourceListing(getClass(), UNSUCCESSFUL_PATH);
+
+        for (String file : files) {
+            ParseJob parseJob = new ParseJob(file);
+            ParsedObject parsedObject = parseJob.runAndCreateGraph(ParseJob.RunMode.WITH_ASSERTIONS);
+
+            Assert.assertNotNull(parsedObject);
+
+            // we assume that if no ApplicationException is thrown then everything were validate OK
+            ShortestPathJob.withAssertions(parsedObject).run();
+        }
     }
 
     /**

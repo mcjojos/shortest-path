@@ -267,6 +267,13 @@ The application's logs exist under LOGS/SHORTEST_PATH_yyyy-MM-dd.log
 ## Implementation details
 The application is using the [jgrapht](https://github.com/jgrapht/jgrapht/) library and specifically its
 implementation of [Dijkstra's shortest path algorithm](http://mathworld.wolfram.com/DijkstrasAlgorithm.html)
+If you are a developer and you want to place more unit tests, please add the files that you expect to pass
+the tests under the following folder
+```
+downloaded_folder/src/test/resources/test_success_input
+```
+The application will pick all of them and execute them in serial. It will always run with assertions on in that case.
+
 
 
 ### FUTURE TODO

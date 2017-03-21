@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A job whose sole purpose it to compute the shortest path of a weighted directed graph
@@ -83,9 +84,15 @@ public class ShortestPathJob {
     }
 
     /**
-     * The run command that will calculate the shortest path between vertices and calculate the shipping costs
+     * The run function will calculate the shortest path between vertices and calculate the shipping costs
+     * if dimensions are passed
      */
     public void run() {
+        // immediately return if no vertices or edges are found
+        if (graphIsInvalid()) {
+            return;
+        }
+
         log.info("Start calculating the graph for sources {}", sources);
 
         DijkstraShortestPath<String, ParseJob.RelationshipEdge> dijkstraAlg =
@@ -122,7 +129,6 @@ public class ShortestPathJob {
                             log.info("Shipping cost defined for path from {} -> {} is correctly asserted to {}", source, target, shippingCost);
                         }
                     }
-
                 }
             }
         } else { // running without assertions
@@ -159,6 +165,18 @@ public class ShortestPathJob {
                 throw new ApplicationException("Cannot write to " + outputFileName);
             }
         }
+    }
+
+    private boolean graphIsInvalid() {
+        final boolean invalid = true;
+        if (Objects.isNull(graph) || Objects.isNull(graph.vertexSet()) || graph.vertexSet().isEmpty()) {
+            log.warn("Graph contains no vertices...exiting");
+            return invalid;
+        } else if (Objects.isNull(graph.edgeSet()) || graph.edgeSet().isEmpty()) {
+            log.warn("Graph with no edges between vertices");
+            return invalid;
+        }
+        return !invalid;
     }
 
 }
