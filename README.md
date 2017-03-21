@@ -279,6 +279,7 @@ The application will pick all of them and execute them in serial. It will always
 ### FUTURE TODO
 In future releases make the input file name either a single file or a directory. In the later case it should 
 parse every .csv file inside the directory and run and produce some results for every single file of the directory.
+Also implement the possibility to instantiate the application without input files, just by passing the paths as a string object.
 
 
 ENJOY!
